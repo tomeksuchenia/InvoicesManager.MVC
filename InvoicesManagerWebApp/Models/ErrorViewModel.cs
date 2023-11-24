@@ -1,4 +1,4 @@
-namespace MVC_TEST.Models
+namespace InvoicesManagerWebApp.Models
 {
     public class ErrorViewModel
     {
