@@ -19,7 +19,7 @@ namespace InvoicesManagerWebApp.Models
         [Required]
         public ICollection<Item>? Items { get; set; }
         [ForeignKey("User")]
-        public string? UserId { get; set; }
+        public int? UserId { get; set; }
         public User? User { get; set; }
     }
 }
