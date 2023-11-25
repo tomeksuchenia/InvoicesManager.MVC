@@ -1,4 +1,7 @@
 using InvoicesManagerWebApp.Data;
+using InvoicesManagerWebApp.Interface;
+using InvoicesManagerWebApp.Repository;
+using InvoicesManagerWebApp.Services;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -6,6 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddScoped<IInvoiceService, InvoiceService>();
+builder.Services.AddScoped<IInvoiceRepository, InvoiceRepository>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
