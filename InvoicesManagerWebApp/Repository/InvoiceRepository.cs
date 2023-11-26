@@ -17,6 +17,11 @@ namespace InvoicesManagerWebApp.Repository
             => await _context.Invoices.Include(i => i.Items).FirstOrDefaultAsync(x => x.Id == id);
         public async Task<IEnumerable<Invoice>> GetAll()
             => await _context.Invoices.ToListAsync();
+
+        public async Task<IEnumerable<Invoice>> GetInvoicesListForMonth(int month)
+        {
+            return await _context.Invoices.Where(x => x.InvoiceDate.Month == month).ToListAsync();
+        }
         public async Task Add(Invoice invoice)
         {
             _context.Add(invoice);

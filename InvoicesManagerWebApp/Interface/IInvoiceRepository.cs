@@ -6,6 +6,7 @@ namespace InvoicesManagerWebApp.Interface
     {
         Task<IEnumerable<Invoice>> GetAll();
         Task<Invoice> GetById(int id);
+        Task<IEnumerable<Invoice>> GetInvoicesListForMonth(int month);
         Task Add(Invoice invoice);
 
         Task Update(Invoice invoice);

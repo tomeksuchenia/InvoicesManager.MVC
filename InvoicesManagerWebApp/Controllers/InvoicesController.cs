@@ -19,6 +19,16 @@ namespace InvoicesManagerWebApp.Controllers
             return View(invoices);
         }
 
+        public async Task<IActionResult> Details(int id)
+        {
+            var invoice = await _invoiceService.GetById(id);
+            if (invoice == null)
+            {
+                return NotFound();
+            }
+            return View(invoice);
+        }
+
         public async Task<IActionResult> Create()
         {
             var createInvoiceViewModel = new CreateInvoiceViewModel
@@ -49,5 +59,6 @@ namespace InvoicesManagerWebApp.Controllers
             }
             return View(invoiceVM);
         }
+
     }
 }
