@@ -1,0 +1,169 @@
+﻿@using InvoicesManagerWebApp.Data.Enum;
+@using InvoicesManagerWebApp.ViewModel;
+@model CreateInvoiceViewModel
+
+@{
+    var i = 0;
+    ViewData["Title"] = "Create";
+}
+
+<div>
+
+    <p1>
+        <h1>Create</h1>
+
+        <h4>Invoice</h4>
+    </p1>
+
+
+    <div class="row">
+        <div class="col-md-10">
+            <form asp-action="Create" method="post" id="invoiceForm">
+                <input type="hidden" asp-for="UserId" />
+                <div asp-validation-summary="All" class="text-danger"></div>
+                <div class="form-group">
+                    <label asp-for="InvoiceDate" class="control-label"></label>
+                    <input asp-for="InvoiceDate" class="form-control" />
+                    <span asp-validation-for="InvoiceDate" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Notes" class="control-label"></label>
+                    <input asp-for="Notes" class="form-control" />
+                    <span asp-validation-for="Notes" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Status" class="control-label"></label>
+                    <select asp-for="Status" asp-items="@Html.GetEnumSelectList<Status>()" class="form-control"></select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PaymentMethod" class="control-label"></label>
+                    <select asp-for="PaymentMethod" asp-items="@Html.GetEnumSelectList<PaymentMethod>()" class="form-control"></select>
+                    <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Currency" class="control-label"></label>
+                    <select asp-for="Currency" asp-items="@Html.GetEnumSelectList<Currency>()" class="form-control"></select>
+                    <span asp-validation-for="Currency" class="text-danger"></span>
+                </div>
+                @if (Model.Items == null)
+                {
+                    <div id="itemsContainer">
+                        <div class="item-group row">
+                            <div class="form-group col-md-3">
+                                <label for="Items[0].Name" class="control-label">Product Name</label>
+                                <input type="text" name="Items[0].Name" class="form-control" />
+                                <span asp-validation-for="Items" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="Items[0].Price" class="control-label">Product Price</label>
+                                <input type="text" name="Items[0].Price" class="form-control" />
+                                <span asp-validation-for="Items" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-1">
+                                <label for="Items[0].Quantity" class="control-label">QTY</label>
+                                <input type="text" name="Items[0].Quantity" class="form-control" />
+                                <span asp-validation-for="Items" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-1">
+                                <label for="Items[0].Vat" class="control-label">VAT (%)</label>
+                                <input type="text" name="Items[0].Vat" class="form-control" />
+                                <span asp-validation-for="Items" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <div id="itemsContainer">
+                        @foreach (var item in Model.Items)
+                        {
+                            <div class="item-group row">
+                                <input type="hidden" asp-for="@item.Id" name="Items[@(i)].Id" />
+                                <input type="hidden" asp-for="@item.InvoiceId" name="Items[@(i)].InvoiceId" />
+                                <div class="form-group col-md-3">
+                                    <label for="Items[@(i)].Name" class="control-label">Product Name</label>
+                                    <input asp-for="@item.Name" name="Items[@(i)].Name" class="form-control" />
+                                    <span asp-validation-for="Items" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="Items[@(i)].Price" class="control-label">Product Price</label>
+                                    <input asp-for="@item.Price" name="Items[@(i)].Price" class="form-control" />
+                                    <span asp-validation-for="Items" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-1">
+                                    <label for="Items[@(i)].Quantity" class="control-label">QTY</label>
+                                    <input asp-for="@item.Quantity" name="Items[@(i)].Quantity" class="form-control" />
+                                    <span asp-validation-for="Items" class="text-danger"></span>
+                                </div>
+                                <div class="form-group col-md-1">
+                                    <label for="Items[@(i)].Vat" class="control-label">VAT (%)</label>
+                                    <input asp-for="@item.Vat" name="Items[@(i)].Vat" class="form-control" />
+                                    <span asp-validation-for="Items" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            i++;
+                        }
+                    </div>
+                }
+
+                <button type="button" class="btn btn-success" style="margin-top: 10px" onclick="addNewItem()">Add new Product</button>
+
+                <div class="form-group" style="margin-top: 10px">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index" class="btn btn-secondary" style="margin-top: 10px">Back to List</a>
+    </div>
+
+
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script>
+        var itemIndex = 0;
+
+        function addNewItem() {
+            itemIndex++;
+
+            var newItemGroup = `
+                        <div class="item-group row">
+                            <div class="form-group col-md-3">
+                                <label for="Items[${itemIndex}].Name" class="control-label">Product Name</label>
+                                <input type="text" name="Items[${itemIndex}].Name" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="Items[${itemIndex}].Price" class="control-label">Product Price</label>
+                                <input type="text" name="Items[${itemIndex}].Price" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-1">
+                                <label for="Items[${itemIndex}].Quantity" class="control-label">QTY</label>
+                                <input type="text" name="Items[${itemIndex}].Quantity" class="form-control" />
+                            </div>
+                            <div class="form-group col-md-1">
+                                <label for="Items[${itemIndex}].Vat" class="control-label">VAT (%)</label>
+                                <input type="text" name="Items[${itemIndex}].Vat" class="form-control" />
+                            </div>
+                            <div class="form-group col-md" style="margin-top: auto">
+                                <button type="button" class="btn btn-danger" onclick="removeItem(this)">X</button>
+                            </div>
+                        </div>
+                    `;
+
+            $("#itemsContainer").append(newItemGroup);
+        }
+
+        function removeItem(button) {
+            $(button).closest('.item-group').remove();
+        }
+    </script>
+}

@@ -20,6 +20,12 @@ namespace InvoicesManagerWebApp.Services
         }
         public async Task Add(Invoice invoice)
         {
+            foreach (var item in invoice.Items)
+            {
+                var priceWithTax = item.Price * (decimal)(1 + item.Vat / 100);
+                invoice.Total += priceWithTax * item.Quantity;
+            }
+
             await _invoiceRepository.Add(invoice);
         }
 
