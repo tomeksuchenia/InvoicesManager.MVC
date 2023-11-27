@@ -50,7 +50,7 @@ namespace InvoicesManagerWebApp.Services
                 invoiceFromDb.Total += priceWithTax * item.Quantity;
             }
 
-            await _invoiceRepository.Update(invoice);
+            await _invoiceRepository.Update(invoiceFromDb);
         }
         public async Task Delete(Invoice invoice)
         {

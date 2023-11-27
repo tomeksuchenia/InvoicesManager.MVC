@@ -60,5 +60,49 @@ namespace InvoicesManagerWebApp.Controllers
             return View(invoiceVM);
         }
 
+        public async Task<IActionResult> Edit(int id)
+        {
+            var invoice = await _invoiceService.GetById(id);
+            if (invoice == null) { return NotFound();}
+
+            var invoiceVM = new EditInvoiceViewModel
+            {
+                InvoiceDate = invoice.InvoiceDate,
+                InvoiceCode = invoice.InvoiceCode,
+                Notes = invoice.Notes,
+                Status = invoice.Status,
+                Currency = invoice.Currency,
+                PaymentMethod = invoice.PaymentMethod,
+                Items = invoice.Items,
+                UserId = invoice.UserId
+            };
+
+            return View(invoiceVM);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, EditInvoiceViewModel invoiceVM)
+        {
+            if (ModelState.IsValid)
+            {
+                var invoice = new Invoice
+                {
+                    Id = id,
+                    InvoiceDate = invoiceVM.InvoiceDate,
+                    InvoiceCode = invoiceVM.InvoiceCode,
+                    Notes = invoiceVM.Notes,
+                    Status = invoiceVM.Status,
+                    Currency = invoiceVM.Currency,
+                    PaymentMethod = invoiceVM.PaymentMethod,
+                    Items = invoiceVM.Items,
+                    UserId = invoiceVM.UserId
+                };
+
+                await _invoiceService.Update(invoice);
+                return RedirectToAction("Index");
+            }
+            return View(invoiceVM);
+        }
+
     }
 }
