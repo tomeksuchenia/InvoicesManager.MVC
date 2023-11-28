@@ -104,5 +104,25 @@ namespace InvoicesManagerWebApp.Controllers
             return View(invoiceVM);
         }
 
+        public async Task<IActionResult> Delete(int id)
+        {
+            var invoice = await _invoiceService.GetById(id);
+            if (invoice == null)
+            {
+                return NotFound();
+            }
+            return View(invoice);
+        }
+
+        [HttpPost]
+        [ActionName("Delete")]
+        public async Task<IActionResult> DeleteInvoice(int id)
+        {
+            var invoice = await _invoiceService.GetById(id);
+            if (invoice == null) return RedirectToAction("Index");
+            await _invoiceService.Delete(invoice);
+            return RedirectToAction("Index");
+        }
+
     }
 }
