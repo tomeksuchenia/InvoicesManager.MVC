@@ -1,9 +1,10 @@
 ﻿using InvoicesManagerWebApp.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace InvoicesManagerWebApp.Data
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User>
     {
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Item> Items { get; set; }
