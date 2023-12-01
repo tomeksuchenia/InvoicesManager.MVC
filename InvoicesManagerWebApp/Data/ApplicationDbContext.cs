@@ -9,6 +9,7 @@ namespace InvoicesManagerWebApp.Data
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<Item> Items { get; set; }
         public DbSet<Address> Address { get; set; }
+        public DbSet<User> User { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
