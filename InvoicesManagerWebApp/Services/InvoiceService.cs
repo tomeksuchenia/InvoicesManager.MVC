@@ -18,6 +18,17 @@ namespace InvoicesManagerWebApp.Services
         {
             return _invoiceRepository.GetAll();
         }
+
+        public async Task<IEnumerable<Invoice>> GetAllUserInvoices()
+        {
+            return await _invoiceRepository.GetAllUserInvoice();
+        }
+
+        public async Task<Invoice> GetInvoiceUserById(int id)
+        {
+            return await _invoiceRepository.GetInvoiceUserById(id);
+        }
+
         public async Task Add(Invoice invoice)
         {
             var invoices = await _invoiceRepository.GetInvoicesListForMonth(invoice.InvoiceDate.Month);
@@ -56,5 +67,6 @@ namespace InvoicesManagerWebApp.Services
         {
             await _invoiceRepository.Delete(invoice);
         }
+
     }
 }

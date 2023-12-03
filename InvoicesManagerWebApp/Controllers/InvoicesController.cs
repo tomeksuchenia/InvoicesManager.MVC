@@ -1,21 +1,28 @@
-﻿using InvoicesManagerWebApp.Interface;
+﻿using InvoicesManagerWebApp.Extensions;
+using InvoicesManagerWebApp.Interface;
 using InvoicesManagerWebApp.Models;
 using InvoicesManagerWebApp.Services;
 using InvoicesManagerWebApp.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace InvoicesManagerWebApp.Controllers
 {
+    [Authorize]
     public class InvoicesController : Controller
     {
+        
         private readonly IInvoiceService _invoiceService;
-        public InvoicesController(IInvoiceService inoviceService)
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        public InvoicesController(IInvoiceService inoviceService, IHttpContextAccessor httpContextAccessor)
         {
             _invoiceService = inoviceService;
+            _httpContextAccessor = httpContextAccessor;
         }
         public async Task<IActionResult> Index()
         {
-            var invoices = await _invoiceService.GetAll();
+            var invoices = await _invoiceService.GetAllUserInvoices();
+            invoices = invoices.OrderByDescending(x => x.InvoiceDate).ToList();
             return View(invoices);
         }
 
@@ -33,7 +40,9 @@ namespace InvoicesManagerWebApp.Controllers
         {
             var createInvoiceViewModel = new CreateInvoiceViewModel
             {
-                InvoiceDate = DateTime.UtcNow
+                InvoiceDate = DateTime.UtcNow,
+                UserId = _httpContextAccessor.HttpContext?.User.GetUserId()
+                
             };
             return View(createInvoiceViewModel);
         }
