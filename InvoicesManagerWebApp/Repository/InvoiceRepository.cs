@@ -17,7 +17,7 @@ namespace InvoicesManagerWebApp.Repository
             _httpContextAccessor = httpContextAccessor;
         }
         public async Task<Invoice> GetById(int id)
-            => await _context.Invoices.Include(i => i.Items).FirstOrDefaultAsync(x => x.Id == id);
+            => await _context.Invoices.Include(x => x.Items).Include(x => x.Customer).Include(x => x.Customer.Address).FirstOrDefaultAsync(x => x.Id == id);
         public async Task<IEnumerable<Invoice>> GetAll()
             => await _context.Invoices.ToListAsync();
 
@@ -31,7 +31,7 @@ namespace InvoicesManagerWebApp.Repository
         public async Task<Invoice> GetInvoiceUserById(int id)
         {
             var curUser = _httpContextAccessor.HttpContext.User.GetUserId();
-            var invoice = await _context.Invoices.Include(x => x.Items).Where(x => x.UserId == curUser.ToString()).FirstOrDefaultAsync(x => x.Id == id);
+            var invoice = await _context.Invoices.Include(x => x.Items).Include(x => x.Customer).Include(x => x.Customer.Address).Where(x => x.UserId == curUser.ToString()).FirstOrDefaultAsync(x => x.Id == id);
             return invoice;
         }
 

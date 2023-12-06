@@ -14,6 +14,7 @@ namespace InvoicesManagerWebApp.ViewModel
         public Status Status { get; set; }
         public Currency Currency { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
+        public Customer Customer { get; set; }
         [Required]
         public ICollection<Item>? Items { get; set; }
         [ForeignKey("User")]

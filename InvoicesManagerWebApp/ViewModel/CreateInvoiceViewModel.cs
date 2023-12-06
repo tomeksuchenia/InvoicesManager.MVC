@@ -16,6 +16,7 @@ namespace InvoicesManagerWebApp.ViewModel
         public decimal Total { get; set; }
         public Status Status { get; set; }
         public Currency Currency { get; set; }
+        public Customer Customer { get; set; }
         [Display(Name = "Payment Method")]
         public PaymentMethod PaymentMethod { get; set; }
         [Required]

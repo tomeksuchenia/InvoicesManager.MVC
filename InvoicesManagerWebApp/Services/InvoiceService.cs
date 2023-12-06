@@ -53,6 +53,7 @@ namespace InvoicesManagerWebApp.Services
             invoiceFromDb.Currency = invoice.Currency;
             invoiceFromDb.Items = invoice.Items;
             invoiceFromDb.PaymentMethod = invoice.PaymentMethod;
+            invoiceFromDb.Customer = invoice.Customer;
             invoiceFromDb.Total = 0;
 
             foreach (var item in invoice.Items)

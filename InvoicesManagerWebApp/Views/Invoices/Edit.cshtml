@@ -7,13 +7,26 @@
     var i = 0;
 }
 
+<style>
+    .form-horizontal {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .form-vertical {
+        display: block; /* Ustawiamy z powrotem na domyślne układanie pionowe */
+    }
+</style>
+
 <h1>Edit</h1>
 
 <h4>Invoice @Model.InvoiceCode   </h4>
 <hr />
 <div class="row">
-    <div class="col-md-10">
-        <form asp-action="Edit">
+    <form class="form-horizontal" asp-action="Edit">
+        <input type="hidden" asp-for="UserId" />
+        <input type="hidden" asp-for="InvoiceCode" />
+        <div class="col-md-6">
             <div asp-validation-summary="All" class="text-danger"></div>
             <input type="hidden" asp-for="UserId" />
             <input type="hidden" asp-for="InvoiceCode" />
@@ -77,7 +90,6 @@
                             <button type="button" class="btn btn-danger" onclick="removeItem(this)">X</button>
                         </div>
                     </div>
-
                     i++;
                 }
             </div>
@@ -85,8 +97,46 @@
             <div class="form-group" style="margin-top: 10px">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
-        </form>
-    </div>
+        </div>
+        <div class="col-md-6" style="margin-top: -38px; margin-left: 10px">
+            <h4>Customer information</h4>
+            <div class="form-group">
+                <label asp-for="Customer.Name" class="control-label"></label>
+                <input asp-for="Customer.Name" class="form-control" />
+                <span asp-validation-for="Customer.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Customer.TaxId" class="control-label"></label>
+                <input asp-for="Customer.TaxId" class="form-control" />
+                <span asp-validation-for="Customer.TaxId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Customer.Address.Street" class="control-label"></label>
+                <input asp-for="Customer.Address.Street" class="form-control" />
+                <span asp-validation-for="Customer.Address.Street" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Customer.Address.ZipCode" class="control-label"></label>
+                <input asp-for="Customer.Address.ZipCode" class="form-control" />
+                <span asp-validation-for="Customer.Address.ZipCode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Customer.Address.City" class="control-label"></label>
+                <input asp-for="Customer.Address.City" class="form-control" />
+                <span asp-validation-for="Customer.Address.City" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Customer.Address.State" class="control-label"></label>
+                <input asp-for="Customer.Address.State" class="form-control" />
+                <span asp-validation-for="Customer.Address.State" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Customer.Email" class="control-label"></label>
+                <input asp-for="Customer.Email" class="form-control" />
+                <span asp-validation-for="Customer.Email" class="text-danger"></span>
+            </div>
+        </div>
+    </form>
 </div>
 
 <div style="margin-top: 10px">
@@ -104,30 +154,30 @@
             itemIndex++;
 
             var newItemGroup = `
-                                    <div id="itemsContainer">
-                                    <div class="item-group row">
-                                        <div class="form-group col-md-3">
-                                            <label for="Items[${itemIndex}].Name" class="control-label">Product Name</label>
-                                            <input type="text" name="Items[${itemIndex}].Name" class="form-control" />
+                                            <div id="itemsContainer">
+                                            <div class="item-group row">
+                                                <div class="form-group col-md-3">
+                                                    <label for="Items[${itemIndex}].Name" class="control-label">Product Name</label>
+                                                    <input type="text" name="Items[${itemIndex}].Name" class="form-control" />
+                                                </div>
+                                                <div class="form-group col-md-3">
+                                                     <label for="Items[${itemIndex}].Price" class="control-label">Product Price</label>
+                                                     <input type="text" name="Items[${itemIndex}].Price" class="form-control" />
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                        <label for="Items[${itemIndex}].Quantity" class="control-label">QTY</label>
+                                                        <input type="text" name="Items[${itemIndex}].Quantity" class="form-control" />
+                                                </div>
+                                                <div class="form-group col-md-2">
+                                                        <label for="Items[${itemIndex}].Vat" class="control-label">Vat (%)</label>
+                                                        <input type="text" name="Items[${itemIndex}].Vat" class="form-control" />
+                                                </div>
+                                                    <div class="form-group col-md" style="margin-top: 23px">
+                                                    <button type="button" class="btn btn-danger" onclick="removeItem(this)">X</button>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-group col-md-3">
-                                             <label for="Items[${itemIndex}].Price" class="control-label">Product Price</label>
-                                             <input type="text" name="Items[${itemIndex}].Price" class="form-control" />
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                                <label for="Items[${itemIndex}].Quantity" class="control-label">QTY</label>
-                                                <input type="text" name="Items[${itemIndex}].Quantity" class="form-control" />
-                                        </div>
-                                        <div class="form-group col-md-2">
-                                                <label for="Items[${itemIndex}].Vat" class="control-label">Vat (%)</label>
-                                                <input type="text" name="Items[${itemIndex}].Vat" class="form-control" />
-                                        </div>
-                                            <div class="form-group col-md" style="margin-top: 23px">
-                                            <button type="button" class="btn btn-danger" onclick="removeItem(this)">X</button>
-                                        </div>
-                                    </div>
-                                </div>
-                               `;
+                                       `;
 
             $("#itemsContainer").append(newItemGroup);
 

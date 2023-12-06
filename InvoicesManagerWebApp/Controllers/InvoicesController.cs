@@ -61,6 +61,7 @@ namespace InvoicesManagerWebApp.Controllers
                     Currency = invoiceVM.Currency,
                     PaymentMethod = invoiceVM.PaymentMethod,
                     Items = invoiceVM.Items,
+                    Customer = invoiceVM.Customer,
                     UserId = invoiceVM.UserId
                 };
                 await _invoiceService.Add(invoice);
@@ -83,6 +84,7 @@ namespace InvoicesManagerWebApp.Controllers
                 Currency = invoice.Currency,
                 PaymentMethod = invoice.PaymentMethod,
                 Items = invoice.Items,
+                Customer = invoice.Customer,
                 UserId = invoice.UserId
             };
 
@@ -104,6 +106,7 @@ namespace InvoicesManagerWebApp.Controllers
                     Currency = invoiceVM.Currency,
                     PaymentMethod = invoiceVM.PaymentMethod,
                     Items = invoiceVM.Items,
+                    Customer = invoiceVM.Customer,
                     UserId = invoiceVM.UserId
                 };
 

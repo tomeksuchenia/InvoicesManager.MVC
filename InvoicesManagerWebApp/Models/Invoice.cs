@@ -15,6 +15,7 @@ namespace InvoicesManagerWebApp.Models
         public decimal Total { get; set; }
         public Status Status { get; set; }
         public Currency Currency { get; set; }
+        public Customer? Customer { get; set; }
         public PaymentMethod PaymentMethod { get; set; }
         [Required]
         public ICollection<Item>? Items { get; set; }
