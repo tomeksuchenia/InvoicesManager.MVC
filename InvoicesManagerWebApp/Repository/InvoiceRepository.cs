@@ -35,9 +35,10 @@ namespace InvoicesManagerWebApp.Repository
             return invoice;
         }
 
-        public async Task<IEnumerable<Invoice>> GetInvoicesListForMonth(int month)
+        public async Task<IEnumerable<Invoice>> GetUserInvoicesListForMonth(int month)
         {
-            return await _context.Invoices.Where(x => x.InvoiceDate.Month == month).ToListAsync();
+            var userId = _httpContextAccessor.HttpContext.User.GetUserId();
+            return await _context.Invoices.Where(x => x.UserId == userId).Where(x => x.InvoiceDate.Month == month).ToListAsync();
         }
         public async Task Add(Invoice invoice)
         {

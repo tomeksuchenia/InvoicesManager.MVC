@@ -31,7 +31,7 @@ namespace InvoicesManagerWebApp.Services
 
         public async Task Add(Invoice invoice)
         {
-            var invoices = await _invoiceRepository.GetInvoicesListForMonth(invoice.InvoiceDate.Month);
+            var invoices = await _invoiceRepository.GetUserInvoicesListForMonth(invoice.InvoiceDate.Month);
             invoice.InvoiceCode = $"{invoices.Count() + 1}/{invoice.InvoiceDate.Month}/{invoice.InvoiceDate.Year}";
 
             foreach (var item in invoice.Items)
