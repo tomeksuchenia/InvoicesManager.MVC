@@ -72,7 +72,7 @@ namespace InvoicesManagerWebApp.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var invoice = await _invoiceService.GetById(id);
+            var invoice = await _invoiceService.GetInvoiceUserById(id);
             if (invoice == null) { return NotFound();}
 
             var invoiceVM = new EditInvoiceViewModel
