@@ -22,13 +22,12 @@ namespace InvoicesManagerWebApp.Controllers
         public async Task<IActionResult> Index()
         {
             var invoices = await _invoiceService.GetAllUserInvoices();
-            invoices = invoices.OrderByDescending(x => x.InvoiceDate).ToList();
             return View(invoices);
         }
 
         public async Task<IActionResult> Details(int id)
         {
-            var invoice = await _invoiceService.GetById(id);
+            var invoice = await _invoiceService.GetInvoiceUserById(id);
             if (invoice == null)
             {
                 return NotFound();
@@ -118,7 +117,7 @@ namespace InvoicesManagerWebApp.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            var invoice = await _invoiceService.GetById(id);
+            var invoice = await _invoiceService.GetInvoiceUserById(id);
             if (invoice == null)
             {
                 return NotFound();

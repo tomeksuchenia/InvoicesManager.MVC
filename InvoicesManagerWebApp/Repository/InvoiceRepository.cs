@@ -24,7 +24,7 @@ namespace InvoicesManagerWebApp.Repository
         public async Task<IEnumerable<Invoice>> GetAllUserInvoice()
         {
             var curUser = _httpContextAccessor.HttpContext?.User.GetUserId();
-            var userInvoices = await _context.Invoices.Where(x => x.UserId == curUser.ToString()).ToListAsync();
+            var userInvoices = await _context.Invoices.Where(x => x.UserId == curUser.ToString()).OrderByDescending(x => x.InvoiceDate).ToListAsync();
             return userInvoices;
         }
 

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace InvoicesManagerWebApp.Models
 {
@@ -9,6 +10,7 @@ namespace InvoicesManagerWebApp.Models
         public string? Street { get; set; }
         public string? City { get; set; }
         public string? State { get; set; }
+        [DisplayName("Zip code")]
         public int ZipCode { get; set; }
     }
 }

@@ -5,7 +5,14 @@ VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InvoicesManagerWebApp", "InvoicesManagerWebApp", "{3E5B5266-EFBA-4AD6-AB5D-37A7EDA66144}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoicesManagerWebApp", "InvoicesManagerWebApp\InvoicesManagerWebApp.csproj", "{B4543817-22B2-40AF-B26C-1F3D6EB68AE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvoicesManagerWebApp", "InvoicesManagerWebApp\InvoicesManagerWebApp.csproj", "{B4543817-22B2-40AF-B26C-1F3D6EB68AE7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "InvoicesManagerWebApp.Tests", "InvoicesManagerWebApp.Tests", "{541CEEBA-24FB-4659-BBDC-1AFF447CCCA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoicesManagerWebApp.Tests", "InvoicesManagerWebApp.Tests\InvoicesManagerWebApp.Tests.csproj", "{9F8F7797-7C9D-4E9B-AA40-A11BF9E2D53A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{B4543817-22B2-40AF-B26C-1F3D6EB68AE7} = {B4543817-22B2-40AF-B26C-1F3D6EB68AE7}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,12 +24,17 @@ Global
 		{B4543817-22B2-40AF-B26C-1F3D6EB68AE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B4543817-22B2-40AF-B26C-1F3D6EB68AE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B4543817-22B2-40AF-B26C-1F3D6EB68AE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9F8F7797-7C9D-4E9B-AA40-A11BF9E2D53A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F8F7797-7C9D-4E9B-AA40-A11BF9E2D53A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F8F7797-7C9D-4E9B-AA40-A11BF9E2D53A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F8F7797-7C9D-4E9B-AA40-A11BF9E2D53A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B4543817-22B2-40AF-B26C-1F3D6EB68AE7} = {3E5B5266-EFBA-4AD6-AB5D-37A7EDA66144}
+		{9F8F7797-7C9D-4E9B-AA40-A11BF9E2D53A} = {541CEEBA-24FB-4659-BBDC-1AFF447CCCA5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {786932D2-6063-4466-AAF9-5B262BE3ADC4}
