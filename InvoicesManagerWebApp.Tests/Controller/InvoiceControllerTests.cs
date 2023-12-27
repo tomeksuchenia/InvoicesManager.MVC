@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace InvoicesManagerWebApp.Tests.Controller
 {
@@ -27,7 +28,6 @@ namespace InvoicesManagerWebApp.Tests.Controller
             _invoiceService = A.Fake<IInvoiceService>();
             _invoiceRepository= A.Fake<IInvoiceRepository>();
             _httpContextAccessor = A.Fake<IHttpContextAccessor>();
-
             _invoiceController = new InvoicesController(_invoiceService, _httpContextAccessor);
         }
 
@@ -91,7 +91,7 @@ namespace InvoicesManagerWebApp.Tests.Controller
             var result = _invoiceController.Delete(1);
             var viewResult = await (result as Task<IActionResult>);
             //Assert
-            viewResult.Should().BeOfType<BadRequestResult>();
+            viewResult.Should().BeOfType<NotFoundResult>();
         }
     }
 }
