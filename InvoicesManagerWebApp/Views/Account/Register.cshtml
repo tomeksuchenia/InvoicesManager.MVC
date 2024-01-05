@@ -19,6 +19,13 @@
             </div>
         }
 
+        @if (TempData["Registered"] != null)
+        {
+            <div class="col-md-12 alert alert-success">
+                <span> @TempData["Registered"] </span>
+            </div>
+        }
+
         <div class="row">
             <div class="col-md-8 offset-2">
                 <form asp-action="Register">

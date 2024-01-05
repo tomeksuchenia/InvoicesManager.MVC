@@ -31,7 +31,7 @@ namespace InvoicesManagerWebApp.Repository
         public async Task<Invoice> GetInvoiceUserById(int id)
         {
             var curUser = _httpContextAccessor.HttpContext.User.GetUserId();
-            var invoice = await _context.Invoices.Include(x => x.Items).Include(x => x.Customer).Include(x => x.Customer.Address).Where(x => x.UserId == curUser.ToString()).FirstOrDefaultAsync(x => x.Id == id);
+            var invoice = await _context.Invoices.Include(x => x.Items).Include(x => x.Customer).Include(x => x.Customer.Address).Include(x => x.User).Where(x => x.UserId == curUser.ToString()).FirstOrDefaultAsync(x => x.Id == id);
             return invoice;
         }
 

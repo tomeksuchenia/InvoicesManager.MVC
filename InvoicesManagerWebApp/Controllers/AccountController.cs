@@ -87,7 +87,18 @@ namespace InvoicesManagerWebApp.Controllers
             };
             var newUserResponse = await _userManager.CreateAsync(newUser, registerViewModel.Password);
 
-            return View();
+            if (!newUserResponse.Succeeded)
+            {
+                foreach (var error in newUserResponse.Errors)
+                {
+                    TempData["Error"] += error.Description + "\n";
+                }
+                return View(registerViewModel);
+            }
+
+            TempData["Registered"] += "Your account registered. You can login now.";
+
+            return View(registerViewModel);
         }
 
         [HttpPost]
